@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textAlignment="center"
-        android:text="Don't have an account? \nClick here." />
+        android:text="Don't have an account? \nClick here and fuck you." />
 
     <TextView
         android:id="@+id/textView2"
