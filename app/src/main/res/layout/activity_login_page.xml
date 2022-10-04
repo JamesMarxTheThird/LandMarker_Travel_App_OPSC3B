@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/backgroundimagetest"
+    android:background="@drawable/loginbgtest"
     tools:context=".LoginPage">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:hint="E-mail address"
         android:layout_gravity="center"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="315dp"
         app:startIconDrawable="@drawable/user_name_icon">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -62,7 +62,7 @@
         android:clickable="true"
         android:minHeight="48dp"
         android:onClick="GoToRegPage"
-        android:text="Don't have an account? \nClick here and fuck you."
+        android:text="Don't have an account? \nClick here."
         android:textAlignment="center"
         android:textSize="20sp" />
 
@@ -76,7 +76,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="205dp"
             android:text="  © LandMarker 2022 - All rights reserved." />
     </LinearLayout>
 
