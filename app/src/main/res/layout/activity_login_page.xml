@@ -10,61 +10,61 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.Material3.TextInputLayout.FilledBox"
-        android:layout_width="420dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="E-mail address"
         android:layout_gravity="center"
-        android:layout_marginTop="315dp"
+        android:layout_marginTop="210dp"
         app:startIconDrawable="@drawable/user_name_icon">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailET"
+            android:id="@+id/emailET_Reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.Material3.TextInputLayout.FilledBox"
-        android:layout_width="420dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:hint="Password"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:startIconDrawable="@drawable/password_icon">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordET"
+            android:id="@+id/passwordET_Reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:password="true"
-            android:textSize="28sp" />
+            android:textSize="20sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_width="300dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:text="Login"
         android:textColor="@color/black"
-        android:textSize="28sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:minHeight="48dp"
         android:onClick="GoToRegPage"
         android:text="Don't have an account? \nClick here."
         android:textAlignment="center"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
