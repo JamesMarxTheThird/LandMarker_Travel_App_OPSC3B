@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "53554664543",
+    "firebase_url": "https://landmarker-travel-app-default-rtdb.firebaseio.com",
+    "project_id": "landmarker-travel-app",
+    "storage_bucket": "landmarker-travel-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53554664543:android:3aaca218054d37abb337ea",
+        "android_client_info": {
+          "package_name": "com.varsitycollege.landmarker_travel_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53554664543-9bgplvpqg5ki8c2kb2nie6ds2ever7uu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzPXaFO09RNlfLjkYJbnrnLK5a5UyUOyc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53554664543-9bgplvpqg5ki8c2kb2nie6ds2ever7uu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
