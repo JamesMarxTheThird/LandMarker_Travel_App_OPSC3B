@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/menu_order"
+            android:icon="@drawable/user_name_icon"
+            android:title="Mapping page" />
+        <item
+            android:id="@+id/nav_photo"
+            android:icon="@drawable/user_name_icon"
+            android:title="Land mark details" />
+        <item
+            android:id="@+id/goToSettings"
+            android:icon="@drawable/user_name_icon"
+            android:title="Settings" />
+        <item
+            android:id="@+id/goToProfilePage"
+            android:icon="@drawable/user_name_icon"
+            android:title="Profile page" />
+    </group>
+</menu>
