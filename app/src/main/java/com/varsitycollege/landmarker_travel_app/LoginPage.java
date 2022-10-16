@@ -28,6 +28,7 @@ public class LoginPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference LandMarkerDB_Ref = database.getReference("Users");
 
+    //rebased master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
