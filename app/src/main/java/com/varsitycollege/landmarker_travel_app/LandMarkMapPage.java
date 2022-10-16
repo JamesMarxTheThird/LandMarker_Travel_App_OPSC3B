@@ -47,5 +47,9 @@ public class LandMarkMapPage extends FragmentActivity implements OnMapReadyCallb
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        LatLng CapeTown = new LatLng(-33, 18);
+        mMap.addMarker(new MarkerOptions().position(CapeTown).title("Marker in jou poes"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(CapeTown));
     }
 }
