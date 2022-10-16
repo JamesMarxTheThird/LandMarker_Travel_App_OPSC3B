@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LandMarker_Travel_App</string>
+    <string name="title_activity_land_mark_map_page">LandMarkMapPage</string>
 </resources>
