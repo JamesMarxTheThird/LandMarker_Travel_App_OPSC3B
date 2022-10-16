@@ -99,7 +99,7 @@ public class LoginPage extends AppCompatActivity {
                                     // intent to home activity
                                     Intent intent
                                             = new Intent(LoginPage.this,
-                                            LandMarkMapPage.class);
+                                            HomePage.class);
                                     startActivity(intent);
                                 }
 
