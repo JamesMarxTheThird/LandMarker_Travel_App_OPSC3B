@@ -28,6 +28,7 @@ public class LoginPage extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference LandMarkerDB_Ref = database.getReference("Users");
 
+    //rebased master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +100,7 @@ public class LoginPage extends AppCompatActivity {
                                     // intent to home activity
                                     Intent intent
                                             = new Intent(LoginPage.this,
-                                            HomePage.class);
+                                            LandMarkMapPage.class);
                                     startActivity(intent);
                                 }
 
