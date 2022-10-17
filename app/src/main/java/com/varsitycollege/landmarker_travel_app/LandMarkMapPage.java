@@ -37,10 +37,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.model.Place;
 import com.google.android.material.navigation.NavigationView;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
@@ -60,7 +61,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     //FusedLocationProviderClient
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    //private final LatLng CapeTown = new LatLng(-33.9803833, 18.4759092);
+    private final LatLng CapeTown = new LatLng(-33.9803833, 18.4759092);
     private final LatLng sydney = new LatLng(-34, 151);
 
     // The entry point to the Places API.
@@ -87,6 +88,10 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         binding = ActivityLandMarkMapPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        //Places initialize
+        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        placesClient = Places.createClient(this);
 
         //fused location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -136,7 +141,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
             Toast.makeText(LandMarkMapPage.this, "test", Toast.LENGTH_SHORT).show();
 
-            showCurrentPlace();
+            //showCurrentPlace();
         }
         return true;
     }
@@ -187,7 +192,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 gMap.getUiSettings().setMyLocationButtonEnabled(false);
                 lastKnownLocation = null;
                 getLocationPermission();
-                gMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                gMap.addMarker(new MarkerOptions().position(CapeTown).title("Marker in Sydney"));
             }
         } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
@@ -217,7 +222,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                             Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             gMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(sydney, 15));
+                                    .newLatLngZoom(CapeTown, 15));
                             gMap.getUiSettings().setMyLocationButtonEnabled(false);
 
                         }
