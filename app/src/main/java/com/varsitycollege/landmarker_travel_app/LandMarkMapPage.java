@@ -341,7 +341,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
         // Display the dialog.
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Default Dialog")
+                .setTitle("Nearby Landmarks")
                 .setItems(likelyPlaceNames, listener)
                 .show();
     }
@@ -359,8 +359,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
             case R.id.goToSettings:
                 Intent intent2 = new Intent(LandMarkMapPage.this, SettingsPage.class);
                 startActivity(intent2);
-                break;
 
+                break;
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
