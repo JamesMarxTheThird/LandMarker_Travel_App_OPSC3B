@@ -267,7 +267,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                                         new LatLng(lastKnownLocation.getLatitude(),
                                                 lastKnownLocation.getLongitude()), 15));
                                 gMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(),
-                                        lastKnownLocation.getLongitude())).title("Your Location"));
+                                        lastKnownLocation.getLongitude())).title("Your Location").snippet("You are here!"));
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             }
