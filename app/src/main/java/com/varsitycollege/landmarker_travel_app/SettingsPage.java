@@ -234,20 +234,6 @@ public class SettingsPage extends AppCompatActivity {
         });
         //------------------------------------------------------------------------------------------
 
-
-        editProfileBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*
-                Intent intent = new Intent(SettingsPage.this, ProfilePage.class);
-                startActivity(intent);
-
-                 */
-                //Toast.makeText(SettingsPage.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
         //------------------------------------------------------------------------------------------
         //EXIT SETTINGS
         backArrow.setOnClickListener(new View.OnClickListener() {
@@ -320,8 +306,7 @@ public class SettingsPage extends AppCompatActivity {
                 // Intent class will help to go to next activity using
                 // it's object named intent.
                 // SecondActivty is the name of new created EmptyActivity.
-                Intent intent = new Intent(SettingsPage.this, ProfilePage.class);
-                startActivity(intent);
+                Toast.makeText(SettingsPage.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
             }
         });
         //------------------------------------------------------------------------------------------
