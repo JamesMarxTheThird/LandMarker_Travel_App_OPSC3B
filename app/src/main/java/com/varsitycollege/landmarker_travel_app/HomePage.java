@@ -35,6 +35,12 @@ public class HomePage extends AppCompatActivity implements
                 startActivity(intent3);
                 break;
 
+            case R.id.goToMapRoutes:
+                Intent intenti = new Intent(HomePage.this, LandMarkRoutes.class);
+                startActivity(intenti);
+
+                break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
