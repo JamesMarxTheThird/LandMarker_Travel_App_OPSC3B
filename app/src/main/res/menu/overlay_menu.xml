@@ -23,5 +23,10 @@
             android:id="@+id/goToFavorites"
             android:icon="@drawable/favoriteicon"
             android:title="Favourite places" />
+
+        <item
+            android:id="@+id/goToMapRoutes"
+            android:icon="@drawable/ic_baseline_alt_route_24"
+            android:title="Best routes" />
     </group>
 </menu>
