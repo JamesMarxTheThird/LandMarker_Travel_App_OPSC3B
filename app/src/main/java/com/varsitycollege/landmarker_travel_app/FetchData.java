@@ -1,5 +1,7 @@
 package com.varsitycollege.landmarker_travel_app;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,6 +15,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class FetchData extends AsyncTask<Object, String, String> {
 
@@ -57,9 +61,16 @@ public class FetchData extends AsyncTask<Object, String, String> {
                 JSONObject getName = jsonArray.getJSONObject(i);
                 String name = getName.getString("name");
 
+                JSONObject getRating = jsonArray.getJSONObject(i);
+                String rating = getRating.getString("rating");
+
+                String snippet = "Rating: " + rating + "\n"
+                        + "Latitude " + lat + "\n"
+                        + "Longitude " + lng;
+
                 LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(name).position(latLng).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                markerOptions.title(name).position(latLng).snippet(snippet).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
                 googleMap.addMarker(markerOptions);
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
 

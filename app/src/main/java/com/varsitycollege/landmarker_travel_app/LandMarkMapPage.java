@@ -19,6 +19,8 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,8 +52,10 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -89,6 +93,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
     private Button findNearbyLocations;
     private double lat, lng;
+
+    private String address;
+    private String city;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +159,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
                 FetchData fetchData = new FetchData();
                 fetchData.execute(dataFetch);
+
+                gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
             }
         });
     }
@@ -190,6 +199,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         getLocationPermission();
         updateUI();
         getDeviceLocation();
+
+        //gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
     }
 
     private void getLocationPermission() {
@@ -428,6 +439,25 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    private void Geocode(double lat, double lng) {
+
+        //code used from https://stackoverflow.com/questions/9409195/how-to-get-complete-address-from-latitude-and-longitude
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+        try {
+            addresses = geocoder.getFromLocation(lat, lng, 1);
+
+            address = addresses.get(0).getAddressLine(0);
+            city = addresses.get(0).getLocality();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
