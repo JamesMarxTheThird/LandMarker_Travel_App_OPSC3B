@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.fitness.data.Field;
@@ -33,6 +35,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -53,6 +56,7 @@ import java.util.List;
 public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap gMap;
+    private CameraPosition cameraPosition;
     private ActivityLandMarkMapPageBinding binding;
     boolean LocationPermission;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
@@ -83,9 +87,19 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     private ActionBarDrawerToggle toggleOnOff;
     private NavigationView navigationView;
 
+    private Button findNearbyLocations;
+    private double lat, lng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //get last saved location
+        if (savedInstanceState != null) {
+            lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        }
+
         binding = ActivityLandMarkMapPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -110,13 +124,36 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        findNearbyLocations = findViewById(R.id.findNearbyLocations);
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        findNearbyLocations.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+
+                stringBuilder.append("location=" + lastKnownLocation.getLatitude() + "," + lastKnownLocation.getLongitude());
+                stringBuilder.append("&radius=10000");
+                stringBuilder.append("&type=tourist_attraction");
+                stringBuilder.append("&sensor=true");
+                //stringBuilder.append("&keyword=cruise");
+                stringBuilder.append("&key=" + getResources().getString(R.string.maps_api_key));
+
+                String url = stringBuilder.toString();
+                Object dataFetch[] = new Object[2];
+                dataFetch[0] = gMap;
+                dataFetch[1] = url;
+
+                FetchData fetchData = new FetchData();
+                fetchData.execute(dataFetch);
+            }
+        });
     }
 
     /**
@@ -137,9 +174,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.getCurrentLocation) {
+        if (item.getItemId() == R.id.findNearbyLocations) {
 
-            Toast.makeText(LandMarkMapPage.this, "test", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LandMarkMapPage.this, "test", Toast.LENGTH_SHORT).show();
 
             //showCurrentPlace();
         }
@@ -150,6 +187,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
 
+        getLocationPermission();
         updateUI();
         getDeviceLocation();
     }
@@ -217,6 +255,10 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(lastKnownLocation.getLatitude(),
                                                 lastKnownLocation.getLongitude()), 15));
+                                gMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(),
+                                        lastKnownLocation.getLongitude())).title("Your Location"));
+                                //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
@@ -350,9 +392,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()) {
-              case R.id.getCurrentLocation:
-                  Toast.makeText(LandMarkMapPage.this, "test", Toast.LENGTH_SHORT).show();
-                  showCurrentPlace();
+              case R.id.findNearbyLocations:
+
+                  //showCurrentPlace();
 
                   break;
 
