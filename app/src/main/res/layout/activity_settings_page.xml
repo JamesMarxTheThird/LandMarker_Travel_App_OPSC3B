@@ -112,13 +112,13 @@
                         android:layout_toEndOf="@id/metricIcon"/>
 
                     <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/metricSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/metricSwitch"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:switchMinWidth="50dp"
-                        android:theme="@style/metricSwitch"/>
+                        android:theme="@style/metricSwitch" />
                 </RelativeLayout>
 
 
@@ -137,23 +137,23 @@
                         android:padding="12dp"></ImageView>
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@id/nightModeIcon"
                         android:text="Night Mode"
                         android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/nightModeIcon"/>
+                        android:textStyle="bold" />
 
                     <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/nightModeSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/nightModeSwitch"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:switchMinWidth="50dp"
-                        android:theme="@style/nightModeSwitch"/>
+                        android:theme="@style/nightModeSwitch" />
                 </RelativeLayout>
 
                 <!--notifications-->
@@ -181,13 +181,13 @@
                         android:layout_toEndOf="@id/notificationIcon"/>
 
                     <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/notificationSwitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/notificationSwitch"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:switchMinWidth="50dp"
-                        android:theme="@style/notificationSwitch"/>
+                        android:theme="@style/notificationSwitch" />
                 </RelativeLayout>
 
                 <!--PERFERED TYPE-->
@@ -205,22 +205,23 @@
                         android:padding="12dp"/>
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="Prefered Landmark Type"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@id/locationIcon"
+                        android:text="Prefered Landmark"
                         android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/locationIcon"/>
+                        android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/prefSpinner"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/PLTRightBTN"
-                        android:src="@drawable/right_arrow_icon"
                         android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"/>
+                        android:layout_centerVertical="true" />
+
+
                 </RelativeLayout>
 
             </LinearLayout>
@@ -477,14 +478,14 @@
                         android:padding="12dp"/>
 
                     <TextView
-                        android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_toEndOf="@id/logoutIcon"
                         android:text="Logout"
                         android:textColor="#FFFFFF"
-                        android:textStyle="bold"
-                        android:layout_toEndOf="@id/logoutIcon"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -494,10 +495,22 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"/>
 
+
+
                 </RelativeLayout>
 
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Save" />
         </LinearLayout>
     </ScrollView>
 
