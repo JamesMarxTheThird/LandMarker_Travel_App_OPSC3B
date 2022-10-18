@@ -16,11 +16,12 @@ public class PreferedLandmarkType extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prefered_landmark_type);
 
-        backArrow = findViewById(R.id.backArrow);
+       // backArrow = findViewById(R.id.backArrow);
 
 
         //------------------------------------------------------------------------------------------
         //EXIT PREFERED LANDMARK TYPE
+        /*
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -31,6 +32,8 @@ public class PreferedLandmarkType extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+         */
         //------------------------------------------------------------------------------------------
 
     }

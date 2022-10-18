@@ -43,7 +43,6 @@ public class FetchData extends AsyncTask<Object, String, String> {
     @Override
     protected void onPostExecute(String s) {
 
-
         try {
             JSONObject jsonObject = new JSONObject(s);
 
