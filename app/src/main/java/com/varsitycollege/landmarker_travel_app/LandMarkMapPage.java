@@ -392,17 +392,37 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()) {
-              case R.id.findNearbyLocations:
 
-                  //showCurrentPlace();
-
-                  break;
-
-            case R.id.goToSettings:
-                Intent intent2 = new Intent(LandMarkMapPage.this, SettingsPage.class);
-                startActivity(intent2);
+            case R.id.goToHome:
+                Intent intent = new Intent(LandMarkMapPage.this, HomePage.class);
+                startActivity(intent);
 
                 break;
+
+            case R.id.goToMaps:
+                Intent intent3 = new Intent(LandMarkMapPage.this, LandMarkMapPage.class);
+                startActivity(intent3);
+
+                break;
+
+            case R.id.goToSettings:
+                Intent intent4 = new Intent(LandMarkMapPage.this, SettingsPage.class);
+                startActivity(intent4);
+
+                break;
+
+            case R.id.goToProfilePage:
+                Intent intent5 = new Intent(LandMarkMapPage.this, ProfilePage.class);
+                startActivity(intent5);
+
+                break;
+
+            case R.id.goToFavorites:
+                Intent intent6 = new Intent(LandMarkMapPage.this, FavoritesPage.class);
+                startActivity(intent6);
+
+                break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
