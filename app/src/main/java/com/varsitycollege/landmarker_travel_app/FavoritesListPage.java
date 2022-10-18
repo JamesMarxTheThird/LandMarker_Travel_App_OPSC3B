@@ -13,34 +13,8 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class HomePage extends AppCompatActivity implements
+public class FavoritesListPage extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        switch(item.getItemId()) {
-            case R.id.goToMaps:
-                Intent intent = new Intent(HomePage.this, LandMarkMapPage.class);
-                startActivity(intent);
-                break;
-
-            case R.id.goToSettings:
-                Intent intent2 = new Intent(HomePage.this, SettingsPage.class);
-                startActivity(intent2);
-                break;
-
-            case R.id.goToFavorites:
-                Intent intent3 = new Intent(HomePage.this, FavoritesListPage.class);
-                startActivity(intent3);
-                break;
-
-        }
-
-        drawerLayout.closeDrawer(GravityCompat.START);
-
-        return true;
-    }
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -50,7 +24,8 @@ public class HomePage extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_favorites_list_page);
+
 
         toolbar = findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
@@ -69,5 +44,37 @@ public class HomePage extends AppCompatActivity implements
 
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        switch(item.getItemId()) {
+            case R.id.goToHome:
+                Intent intent4 = new Intent(FavoritesListPage.this, HomePage.class);
+                startActivity(intent4);
+                break;
+
+            case R.id.goToMaps:
+                Intent intent = new Intent(FavoritesListPage.this, LandMarkMapPage.class);
+                startActivity(intent);
+                break;
+
+            case R.id.goToSettings:
+                Intent intent2 = new Intent(FavoritesListPage.this, SettingsPage.class);
+                startActivity(intent2);
+                break;
+
+            case R.id.goToFavorites:
+                Intent intent3 = new Intent(FavoritesListPage.this, FavoritesListPage.class);
+                startActivity(intent3);
+                break;
+
+
+
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
+
+    }
 }
