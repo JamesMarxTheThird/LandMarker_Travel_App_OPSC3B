@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single" >
+
+        <item
+            android:id="@+id/goToHome"
+            android:icon="@drawable/homeicon"
+            android:title="Home" />
         <item
             android:id="@+id/goToMaps"
-            android:icon="@drawable/user_name_icon"
-            android:title="Mapping page" />
+            android:icon="@drawable/mapicon"
+            android:title="Maps" />
         <item
             android:id="@+id/goToSettings"
-            android:icon="@drawable/user_name_icon"
+            android:icon="@drawable/settingsicon"
             android:title="Settings" />
         <item
             android:id="@+id/goToProfilePage"
             android:icon="@drawable/user_name_icon"
             android:title="Profile page" />
+
+        <item
+            android:id="@+id/goToFavorites"
+            android:icon="@drawable/favoriteicon"
+            android:title="Favourite places" />
     </group>
 </menu>

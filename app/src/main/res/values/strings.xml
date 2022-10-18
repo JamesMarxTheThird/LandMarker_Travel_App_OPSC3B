@@ -3,4 +3,5 @@
     <string name="title_activity_land_mark_map_page">LandMarkMapPage</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="maps_api_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCfmyIKwbi2fCo54F4OIMDslvaSs1q_8OA</string>
 </resources>
