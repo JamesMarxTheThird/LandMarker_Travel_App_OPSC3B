@@ -4,15 +4,15 @@
 
         <item
             android:id="@+id/goToHome"
-            android:icon="@drawable/user_name_icon"
+            android:icon="@drawable/homeicon"
             android:title="Home" />
         <item
             android:id="@+id/goToMaps"
-            android:icon="@drawable/user_name_icon"
+            android:icon="@drawable/mapicon"
             android:title="Maps" />
         <item
             android:id="@+id/goToSettings"
-            android:icon="@drawable/user_name_icon"
+            android:icon="@drawable/settingsicon"
             android:title="Settings" />
         <item
             android:id="@+id/goToProfilePage"
@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/goToFavorites"
-            android:icon="@drawable/user_name_icon"
+            android:icon="@drawable/favoriteicon"
             android:title="Favourite places" />
     </group>
 </menu>

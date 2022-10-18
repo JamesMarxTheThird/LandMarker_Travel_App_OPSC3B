@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoritesListPage">
+    tools:context=".FavoritesPage">
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
@@ -32,13 +32,48 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <ListView
+                android:id="@+id/favsLV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="260dp" />
+        </FrameLayout>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:textSize="35dp"
+            android:text="Your Favorite LandMarks" />
+
+        <EditText
+            android:id="@+id/landmarkName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/favoritesBTN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Add to favorites" />
+
+
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
