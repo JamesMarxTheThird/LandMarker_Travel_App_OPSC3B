@@ -8,9 +8,24 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
+
+import java.net.URI;
+
 public class ProfilePage extends AppCompatActivity {
 
     ImageView imageView;
+
+    private ImageView previewPPImage;
+
+    private DatabaseReference databaseReference;
+    private FirebaseAuth mAuth;
+
+    private URI imageUri;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,4 +50,8 @@ public class ProfilePage extends AppCompatActivity {
         });
 
     }
+
+
+
+
 }

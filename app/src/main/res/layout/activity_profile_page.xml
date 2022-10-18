@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/primary">
+    style="@style/SCREEN">
 
     <RelativeLayout
         android:layout_height="wrap_content"
@@ -80,7 +80,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/takePhotoBTN"
-                        android:text="Take Photo"></Button>
+                        android:text="Take Photo"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"></Button>
 
 
                 </RelativeLayout>
@@ -93,7 +95,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/choosePhotoBTN"
-                        android:text="Choose Photo"></Button>
+                        android:text="Choose Photo"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"></Button>
 
 
                 </RelativeLayout>
