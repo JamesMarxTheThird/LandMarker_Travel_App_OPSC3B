@@ -106,7 +106,7 @@ public class SettingsPage extends AppCompatActivity {
                 // Intent class will help to go to next activity using
                 // it's object named intent.
                 // SecondActivty is the name of new created EmptyActivity.
-                Intent intent = new Intent(SettingsPage.this, HomePage.class);
+                Intent intent = new Intent(SettingsPage.this, LandMarkMapPage.class);
                 startActivity(intent);
             }
         });

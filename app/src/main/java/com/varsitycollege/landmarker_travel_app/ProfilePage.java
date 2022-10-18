@@ -18,13 +18,14 @@ public class ProfilePage extends AppCompatActivity {
 
     ImageView imageView;
 
+    /*
     private ImageView previewPPImage;
 
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
     private URI imageUri;
-
+*/
 
 
     @Override
@@ -44,8 +45,8 @@ public class ProfilePage extends AppCompatActivity {
                 // Intent class will help to go to next activity using
                 // it's object named intent.
                 // SecondActivty is the name of new created EmptyActivity.
-                Intent intent = new Intent(ProfilePage.this, SettingsPage.class);
-                startActivity(intent);
+                Intent intent8 = new Intent(ProfilePage.this, SettingsPage.class);
+                startActivity(intent8);
             }
         });
 

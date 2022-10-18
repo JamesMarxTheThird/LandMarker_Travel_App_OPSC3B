@@ -81,8 +81,7 @@ public class FavoritesPage extends AppCompatActivity implements
                     LandMarkerRef.push().setValue(newFav);
 
 
-                }
-                catch (Exception ex){
+                } catch (Exception ex) {
                     Toast.makeText(FavoritesPage.this, "shiiiiii", Toast.LENGTH_SHORT).show();
                 }
 
@@ -142,41 +141,46 @@ public class FavoritesPage extends AppCompatActivity implements
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+
+        switch (item.getItemId()) {
+
             case R.id.goToHome:
-                Intent intent4 = new Intent(FavoritesPage.this, HomePage.class);
-                startActivity(intent4);
+                Intent intent = new Intent(FavoritesPage.this, HomePage.class);
+                startActivity(intent);
+
                 break;
 
             case R.id.goToMaps:
-                Intent intent = new Intent(FavoritesPage.this, LandMarkMapPage.class);
-                startActivity(intent);
+                Intent intent3 = new Intent(FavoritesPage.this, LandMarkMapPage.class);
+                startActivity(intent3);
+
                 break;
 
             case R.id.goToSettings:
-                Intent intent2 = new Intent(FavoritesPage.this, SettingsPage.class);
-                startActivity(intent2);
-                break;
-/*
-            case R.id.goToPFP:
-                Intent intent2 = new Intent(FavoritesPage.this, SettingsPage.class);
-                startActivity(intent2);
+                Intent intent4 = new Intent(FavoritesPage.this, SettingsPage.class);
+                startActivity(intent4);
+
                 break;
 
- */
-/*
+            case R.id.goToProfilePage:
+                Intent intent5 = new Intent(FavoritesPage.this, ProfilePage.class);
+                startActivity(intent5);
+
+                break;
+
             case R.id.goToFavorites:
-                Intent intent3 = new Intent(FavoritesListPage.this, FavoritesListPage.class);
-                startActivity(intent3);
+                Intent intent6 = new Intent(FavoritesPage.this, FavoritesPage.class);
+                startActivity(intent6);
+
                 break;
 
-*/
+
 
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
-
     }
+
 }
