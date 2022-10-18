@@ -8,11 +8,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-
-
-import java.net.URI;
 
 public class ProfilePage extends AppCompatActivity {
 
