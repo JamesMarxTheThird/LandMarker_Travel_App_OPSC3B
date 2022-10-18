@@ -10,7 +10,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,13 +21,18 @@ public class HomePage extends AppCompatActivity implements
 
         switch(item.getItemId()) {
             case R.id.goToMaps:
-                Intent intent = new Intent(HomePage.this, LandMarkDetailsPage.class);
+                Intent intent = new Intent(HomePage.this, LandMarkMapPage.class);
                 startActivity(intent);
                 break;
 
             case R.id.goToSettings:
                 Intent intent2 = new Intent(HomePage.this, SettingsPage.class);
                 startActivity(intent2);
+                break;
+
+            case R.id.goToFavorites:
+                Intent intent3 = new Intent(HomePage.this, FavoritesPage.class);
+                startActivity(intent3);
                 break;
 
         }
