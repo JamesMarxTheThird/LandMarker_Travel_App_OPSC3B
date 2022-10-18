@@ -11,10 +11,6 @@
             android:icon="@drawable/user_name_icon"
             android:title="Maps" />
         <item
-            android:id="@+id/getCurrentLocation"
-            android:icon="@drawable/user_name_icon"
-            android:title="Get Current Location" />
-        <item
             android:id="@+id/goToSettings"
             android:icon="@drawable/user_name_icon"
             android:title="Settings" />
