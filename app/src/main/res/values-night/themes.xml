@@ -13,4 +13,26 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+
+    <!--DARK MODE-->
+    <!--SCREEN BACKGROUND IF DARK MODE IS ON-->
+    <style name="SCREEN">
+        <item name="android:background">#043940</item>
+    </style>
+
+
+    <!--TEXTS BACKGROUND IF DARK MODE IS ON-->
+    <style name="TEXT">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+
+    <!--BUTTON BACKGROUND IF DARK MODE IS ON-->
+    <style name="BUTTON">
+        <item name="android:background">#9A9A9A</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
 </resources>
