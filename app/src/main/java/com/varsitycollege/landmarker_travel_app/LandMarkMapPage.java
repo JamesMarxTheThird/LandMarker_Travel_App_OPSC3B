@@ -28,19 +28,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
 import com.google.android.libraries.places.api.Places;
@@ -50,10 +62,11 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
     private GoogleMap gMap;
     private CameraPosition cameraPosition;
@@ -61,6 +74,15 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     boolean LocationPermission;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private Location lastKnownLocation;
+
+    Location myLocation=null;
+    Location destinationLocation=null;
+    //to get location permissions.
+    private final static int LOCATION_REQUEST_CODE = 23;
+    boolean locationPermission=false;
+    private List<Polyline> polylines=null;
+    protected LatLng start=null;
+    protected LatLng end=null;
 
     //FusedLocationProviderClient
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -183,12 +205,54 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
 
+    public void FindRoutes(LatLng start, LatLng end){
+        if(start==null || end==null) {
+            Toast.makeText(LandMarkMapPage.this,"Unable to get location",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Routing routing = new Routing.Builder()
+                    .travelMode(AbstractRouting.TravelMode.DRIVING)
+                    .withListener(this)
+                    .alternativeRoutes(true)
+                    .waypoints(start, end)
+                    .key("AIzaSyCfmyIKwbi2fCo54F4OIMDslvaSs1q_8OA")  //also define your api key here.
+                    .build();
+            routing.execute();
+        }
+    }
+
+    private void getMyLocation(){
+        gMap.setMyLocationEnabled(true);
+        gMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+            @Override
+            public void onMyLocationChange(@NonNull Location location) {
+                myLocation = location;
+                LatLng ltlng = new LatLng(location.getLatitude(), location.getLongitude());
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(ltlng, 16f);
+                gMap.animateCamera(cameraUpdate);
+            }
+        });
+
+        gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                end = latLng;
+                gMap.clear();
+                start = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+                FindRoutes(start, end);
+            }
+        });
+
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
 
         getLocationPermission();
         updateUI();
+        //getMyLocation();
         getDeviceLocation();
     }
 
@@ -257,6 +321,16 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                                                 lastKnownLocation.getLongitude()), 15));
                                 gMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(),
                                         lastKnownLocation.getLongitude())).title("Your Location"));
+
+                                gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                    @Override
+                                    public void onMapClick(@NonNull LatLng latLng) {
+                                        end = latLng;
+                                        gMap.clear();
+                                        start = new LatLng(lastKnownLocation.getLatitude(), myLocation.getLongitude());
+                                        FindRoutes(start, end);
+                                    }
+                                });
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             }
@@ -430,4 +504,73 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
 
+    @Override
+    public void onRoutingFailure(RouteException e) {
+        View parentLayout = findViewById(android.R.id.content);
+        Snackbar snackbar= Snackbar.make(parentLayout, e.toString(), Snackbar.LENGTH_LONG);
+        snackbar.show();
+//    Findroutes(start,end);
+    }
+
+    @Override
+    public void onRoutingStart() {
+        Toast.makeText(LandMarkMapPage.this,"Finding Route...",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
+        CameraUpdate center = CameraUpdateFactory.newLatLng(start);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
+        if(polylines!=null) {
+            polylines.clear();
+        }
+        PolylineOptions polyOptions = new PolylineOptions();
+        LatLng polylineStartLatLng=null;
+        LatLng polylineEndLatLng=null;
+
+
+        polylines = new ArrayList<>();
+        //add route(s) to the map using polyline
+        for (int i = 0; i <route.size(); i++) {
+
+            if(i==shortestRouteIndex)
+            {
+                polyOptions.color(getResources().getColor(R.color.purple_500));
+                polyOptions.width(7);
+                polyOptions.addAll(route.get(shortestRouteIndex).getPoints());
+                Polyline polyline = gMap.addPolyline(polyOptions);
+                polylineStartLatLng=polyline.getPoints().get(0);
+                int k=polyline.getPoints().size();
+                polylineEndLatLng=polyline.getPoints().get(k-1);
+                polylines.add(polyline);
+
+            }
+            else {
+
+            }
+
+            //Add Marker on route starting position
+            MarkerOptions startMarker = new MarkerOptions();
+            startMarker.position(polylineStartLatLng);
+            startMarker.title("My Location");
+            gMap.addMarker(startMarker);
+
+            //Add Marker on route ending position
+            MarkerOptions endMarker = new MarkerOptions();
+            endMarker.position(polylineEndLatLng);
+            endMarker.title("Destination");
+            gMap.addMarker(endMarker);
+
+        }
+    }
+
+    @Override
+    public void onRoutingCancelled() {
+        FindRoutes(start, end);
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }
