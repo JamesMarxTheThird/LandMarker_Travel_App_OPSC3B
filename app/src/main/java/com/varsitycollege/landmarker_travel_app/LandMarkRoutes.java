@@ -41,6 +41,8 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
+//code used from https://github.com/hamza-ameer/GoogleMaps-Find-Routes/tree/Updated
+
 public class LandMarkRoutes extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener, NavigationView.OnNavigationItemSelectedListener {
 

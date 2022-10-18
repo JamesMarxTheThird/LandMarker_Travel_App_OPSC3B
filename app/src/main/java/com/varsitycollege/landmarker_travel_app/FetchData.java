@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+//code used from https://www.youtube.com/watch?v=e_YLWSNMfZg
+
 public class FetchData extends AsyncTask<Object, String, String> {
 
     String googleNearbyPlacesData;

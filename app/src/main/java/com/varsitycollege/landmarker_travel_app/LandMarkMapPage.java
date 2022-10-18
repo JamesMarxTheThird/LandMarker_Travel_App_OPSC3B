@@ -434,6 +434,12 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
                 break;
 
+            case R.id.goToMapRoutes:
+                Intent intent7 = new Intent(LandMarkMapPage.this, LandMarkRoutes.class);
+                startActivity(intent7);
+
+                break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

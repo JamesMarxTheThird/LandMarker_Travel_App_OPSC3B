@@ -36,8 +36,8 @@ public class HomePage extends AppCompatActivity implements
                 break;
 
             case R.id.goToMapRoutes:
-                Intent intenti = new Intent(HomePage.this, LandMarkRoutes.class);
-                startActivity(intenti);
+                Intent intent4 = new Intent(HomePage.this, LandMarkRoutes.class);
+                startActivity(intent4);
 
                 break;
 

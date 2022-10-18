@@ -37,19 +37,40 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@drawable/round_back_white10_20"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <!--Metrics-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:id="@+id/modernIcon"
+                android:layout_height="40dp"
+                android:background="@drawable/round_back_metric"
+                android:padding="12dp"/>
+
+            <TextView
+                android:layout_marginStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="WELCOME TO OUR MAPPING APPLICATION
+PLEASE SELECT A PAGE FROM THE DROPDOWN MENU FOR FURTHER ACTIONS (THIS PAGE HAS MORE UPDATES TO FOLLOW FOR FINAL POE)"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_toEndOf="@id/modernIcon"/>
+
+
+        </RelativeLayout>
+    </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
