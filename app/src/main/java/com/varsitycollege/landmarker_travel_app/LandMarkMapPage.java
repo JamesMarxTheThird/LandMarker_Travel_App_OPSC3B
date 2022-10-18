@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.material.navigation.NavigationView;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
@@ -50,7 +52,7 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import java.util.Arrays;
 import java.util.List;
 
-public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, GoogleMap.OnMapClickListener {
 
     private GoogleMap gMap;
     private ActivityLandMarkMapPageBinding binding;
@@ -62,6 +64,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     private FusedLocationProviderClient fusedLocationProviderClient;
 
     private final LatLng CapeTown = new LatLng(-33.9803833, 18.4759092);
+
     private final LatLng sydney = new LatLng(-34, 151);
 
     // The entry point to the Places API.
@@ -93,6 +96,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
         placesClient = Places.createClient(this);
 
+
+        //placesClient.fetchPlace();
+
         //fused location
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
@@ -109,8 +115,6 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
-
-
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -152,6 +156,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
         updateUI();
         getDeviceLocation();
+
+        gMap.setOnMapClickListener(this);
+
     }
 
     private void getLocationPermission() {
@@ -368,4 +375,19 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         return true;
     }
 
+    @Override
+    public void onMapClick(@NonNull LatLng latLng) {
+
+        double clickedLat = latLng.latitude;
+        double clickedLong = latLng.longitude;
+
+        LatLng clickedLocation = new LatLng(clickedLat, clickedLong);
+
+        gMap.clear();
+
+        gMap.addMarker(new MarkerOptions().position(clickedLocation).title("You clicked here"));
+
+
+
+    }
 }

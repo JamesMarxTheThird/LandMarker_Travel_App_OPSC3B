@@ -10,8 +10,13 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class FavoritesListPage extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
@@ -20,13 +25,19 @@ public class FavoritesListPage extends AppCompatActivity implements
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggleOnOff;
     private NavigationView navigationView;
+    //private Button addFavorties;
+    //private EditText monumentName;
+
+    //FirebaseDatabase DBREF = FirebaseDatabase.getInstance();
+    //DatabaseReference LandMarkerRef = DBREF.getReference("Favorites");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_list_page);
 
-
+        //addFavorties = findViewById(R.id.addFavoritesBTN);
+        //monumentName = findViewById(R.id.favoritesET);
         toolbar = findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,8 +52,21 @@ public class FavoritesListPage extends AppCompatActivity implements
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
+/*
+        addFavorties.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //LandMarkerRef.child("Favorites").push().setValue(monumentName);
+
+            }
+        });
+
+ */
 
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -62,13 +86,13 @@ public class FavoritesListPage extends AppCompatActivity implements
                 Intent intent2 = new Intent(FavoritesListPage.this, SettingsPage.class);
                 startActivity(intent2);
                 break;
-
+/*
             case R.id.goToFavorites:
                 Intent intent3 = new Intent(FavoritesListPage.this, FavoritesListPage.class);
                 startActivity(intent3);
                 break;
 
-
+*/
 
         }
 

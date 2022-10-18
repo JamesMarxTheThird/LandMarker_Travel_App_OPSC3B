@@ -31,7 +31,7 @@ public class HomePage extends AppCompatActivity implements
                 break;
 
             case R.id.goToFavorites:
-                Intent intent3 = new Intent(HomePage.this, FavoritesListPage.class);
+                Intent intent3 = new Intent(HomePage.this, FavoritesPage.class);
                 startActivity(intent3);
                 break;
 
