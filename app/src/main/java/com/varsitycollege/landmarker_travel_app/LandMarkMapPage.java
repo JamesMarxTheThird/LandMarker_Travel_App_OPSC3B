@@ -267,7 +267,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                                         new LatLng(lastKnownLocation.getLatitude(),
                                                 lastKnownLocation.getLongitude()), 15));
                                 gMap.addMarker(new MarkerOptions().position(new LatLng(lastKnownLocation.getLatitude(),
-                                        lastKnownLocation.getLongitude())).title("Your Location"));
+                                        lastKnownLocation.getLongitude())).title("Your Location").snippet("You are here!"));
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                 //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                             }
@@ -431,6 +431,12 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
             case R.id.goToFavorites:
                 Intent intent6 = new Intent(LandMarkMapPage.this, FavoritesPage.class);
                 startActivity(intent6);
+
+                break;
+
+            case R.id.goToMapRoutes:
+                Intent intent7 = new Intent(LandMarkMapPage.this, LandMarkRoutes.class);
+                startActivity(intent7);
 
                 break;
 

@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+//code used from https://www.youtube.com/watch?v=e_YLWSNMfZg
+
 public class DownloadUrl {
 
     public String retrieveUrl(String url) throws IOException {
