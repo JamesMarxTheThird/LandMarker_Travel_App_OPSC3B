@@ -38,6 +38,11 @@
             android:layout_height="wrap_content"
             android:text="Find Nearby Locations" />
 
+        <Spinner
+            android:id="@+id/spnLocationType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
