@@ -84,7 +84,7 @@ public class FavoritesPage extends AppCompatActivity implements
                     //myRef.setValue("Hello, World!");
 
                 } catch (Exception ex) {
-                    Toast.makeText(FavoritesPage.this, "shiiiiii", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FavoritesPage.this, "Could not add landmark", Toast.LENGTH_SHORT).show();
                 }
 
             }
