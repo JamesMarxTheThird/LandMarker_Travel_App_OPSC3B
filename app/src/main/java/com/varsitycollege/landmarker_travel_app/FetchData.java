@@ -65,7 +65,7 @@ public class FetchData extends AsyncTask<Object, String, String> {
                 JSONObject getRating = jsonArray.getJSONObject(i);
                 String rating = getRating.getString("rating");
 
-                String snippet = "Rating: " + rating + "\n"
+                String snippet = "Rating: " + rating + "⭐" + "\n"
                         + "Latitude " + lat + "\n"
                         + "Longitude " + lng;
 

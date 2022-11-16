@@ -27,7 +27,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.fitness.data.Field;
@@ -43,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
 import com.google.android.libraries.places.api.Places;
@@ -53,6 +56,7 @@ import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -97,6 +101,11 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     private String address;
     private String city;
 
+    private Spinner spType;
+    private String spTypeSelected;
+    private List<String> typeList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +142,17 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
         findNearbyLocations = findViewById(R.id.findNearbyLocations);
 
+        typeList = new ArrayList<>();
+        spType = findViewById(R.id.spnLocationType);
+
+        //ArrayAdapter<String> test = new ArrayAdapter<String>(LandMarkMapPage.this, typeList);
+        //spnAdapter.setDropDownViewResource(R.layout.my_dropdown_item);
+        //spType.setAdapter(spnAdapter);
+
+        ArrayAdapter<CharSequence> spnAdapter = ArrayAdapter.createFromResource(this, R.array.type_array, android.R.layout.simple_spinner_dropdown_item);
+        spnAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spType.setAdapter(spnAdapter);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -143,11 +163,14 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onClick(View view) {
 
+                updateUI();
+                spinnerSelectedItem();
+
                 StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
                 stringBuilder.append("location=" + lastKnownLocation.getLatitude() + "," + lastKnownLocation.getLongitude());
                 stringBuilder.append("&radius=10000");
-                stringBuilder.append("&type=tourist_attraction");
+                stringBuilder.append("&type=" + spTypeSelected);
                 stringBuilder.append("&sensor=true");
                 //stringBuilder.append("&keyword=cruise");
                 stringBuilder.append("&key=" + getResources().getString(R.string.maps_api_key));
@@ -174,6 +197,20 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+    public void spinnerSelectedItem() {
+
+        if (spType.getSelectedItem().toString().equals("Restaurant")){
+            spTypeSelected = "restaurant";
+
+        } else if (spType.getSelectedItem().equals("Tourist Attraction")){
+            spTypeSelected = "tourist_attraction";
+
+        } else if (spType.getSelectedItem().equals("Point of Interest")) {
+            spTypeSelected = "point_of_interest";
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
