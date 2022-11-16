@@ -42,8 +42,10 @@ public class FavoritesPage extends AppCompatActivity implements
     public List<String> favouritesArrayList;
     public ArrayAdapter<String> favALAdapter;
 
-    FirebaseDatabase DBREF = FirebaseDatabase.getInstance();
-    DatabaseReference LandMarkerRef = DBREF.getReference("Favorites");
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference LandMarkerRef = database.getReference("Favorites");
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class FavoritesPage extends AppCompatActivity implements
                 try {
 
                     LandMarkerRef.push().setValue(newFav);
-
+                    //myRef.setValue("Hello, World!");
 
                 } catch (Exception ex) {
                     Toast.makeText(FavoritesPage.this, "shiiiiii", Toast.LENGTH_SHORT).show();
@@ -88,28 +90,28 @@ public class FavoritesPage extends AppCompatActivity implements
             }
         });
 
-        //Supposed to add tb to LV aswell but is buggy
-        /*
+
         LandMarkerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot addedFavourites : snapshot.getChildren()) {
-                    otherFav = newMonumnet.getText().toString();
-                    favouritesArrayList.add(otherFav.toString());
 
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    favouritesArrayList.add(ds.getValue(String.class));
+                    Toast.makeText(FavoritesPage.this, otherFav, Toast.LENGTH_SHORT).show();
                 }
+
                 favALAdapter = new ArrayAdapter<String>(FavoritesPage.this, android.R.layout.simple_list_item_1, favouritesArrayList);
                 favList.setAdapter(favALAdapter);
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(FavoritesPage.this, "eina", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FavoritesPage.this, "Database Error", Toast.LENGTH_SHORT).show();
+
             }
         });
+        //Supposed to add tb to LV aswell but is buggy
 
-         */
     }
 
     /*
