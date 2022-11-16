@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "53554664543",
+    "firebase_url": "https://landmarker-travel-app-default-rtdb.firebaseio.com",
     "project_id": "landmarker-travel-app",
     "storage_bucket": "landmarker-travel-app.appspot.com"
   },

@@ -62,9 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:ems="10"
+            android:hint="Name of Landmark"
             android:inputType="text"
-            android:minHeight="48dp"
-            android:text="Name" />
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/favoritesBTN"
