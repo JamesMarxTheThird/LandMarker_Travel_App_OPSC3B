@@ -163,8 +163,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
             @Override
             public void onClick(View view) {
 
+                updateUI();
                 spinnerSelectedItem();
-                Toast.makeText(LandMarkMapPage.this, spTypeSelected, Toast.LENGTH_SHORT).show();
 
                 StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
 
