@@ -10,6 +10,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -47,7 +49,7 @@ public class HomePage extends AppCompatActivity implements
 
         return true;
     }
-
+    private Button viewLandBTN;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggleOnOff;
@@ -69,10 +71,18 @@ public class HomePage extends AppCompatActivity implements
         toggleOnOff.syncState();
 
         navigationView = findViewById(R.id.nav_view);
+        viewLandBTN = findViewById(R.id.viewNarbyBTN);
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        viewLandBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = new Intent(HomePage.this, LandMarkMapPage.class);
+                startActivity(intent4);
+            }
+        });
     }
 
 
