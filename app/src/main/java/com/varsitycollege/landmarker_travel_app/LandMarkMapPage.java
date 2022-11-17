@@ -42,6 +42,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,6 +54,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
+import com.google.maps.android.SphericalUtil;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -113,6 +115,10 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference LandMarkerRef = database.getReference("Settings");
+
+    private Double theDistance;
+    private Double theDistanceInKm;
+    private Double theDistanceInMiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -215,8 +221,48 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
             }
         });
-    }
+/*
+        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                LatLng clickedMrkr = marker.getPosition();
+                LatLng currPos = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 
+                theDistance = SphericalUtil.computeDistanceBetween(clickedMrkr, currPos);
+
+                theDistanceInKm = theDistance / 1000;
+
+                Double distanceTime = theDistanceInKm / 60;
+
+                LandMarkerRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String metric = snapshot.child("DisplaysIn").getValue(String.class);
+
+                        if (metric.equals("KM")){
+                            Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInKm) + "km" + "Time to get there: " + distanceTime,Toast.LENGTH_SHORT).show();
+
+                            return;
+                        } else {
+
+                            theDistanceInMiles = theDistanceInKm / 1.609;
+
+                            Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInMiles) + "km" + "Time to get there: " + distanceTime,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+                return true;
+            }
+        });
+*/
+    }
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -447,10 +493,11 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
                 // Add a marker for the selected place, with an info window
                 // showing information about that place.
-                gMap.addMarker(new MarkerOptions()
+                MarkerOptions mrkrInfo = new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
-                        .snippet(markerSnippet));
+                        .snippet(markerSnippet);
+                gMap.addMarker(mrkrInfo);
 
                 // Position the map's camera at the location of the marker.
                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
