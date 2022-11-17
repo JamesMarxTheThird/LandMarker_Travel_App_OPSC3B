@@ -87,6 +87,8 @@ public class FavoritesPage extends AppCompatActivity implements
                     Toast.makeText(FavoritesPage.this, "Could not add landmark", Toast.LENGTH_SHORT).show();
                 }
 
+                Intent intent9 = new Intent(FavoritesPage.this, FavoritesPage.class);
+                startActivity(intent9);
             }
         });
 
@@ -97,12 +99,12 @@ public class FavoritesPage extends AppCompatActivity implements
 
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     favouritesArrayList.add(ds.getValue(String.class));
-                    Toast.makeText(FavoritesPage.this, otherFav, Toast.LENGTH_SHORT).show();
                 }
 
                 favALAdapter = new ArrayAdapter<String>(FavoritesPage.this, android.R.layout.simple_list_item_1, favouritesArrayList);
                 favList.setAdapter(favALAdapter);
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
