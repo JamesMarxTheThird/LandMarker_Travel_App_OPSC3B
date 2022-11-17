@@ -287,8 +287,8 @@ public class LandMarkRoutes extends AppCompatActivity implements OnMapReadyCallb
 
 
             case R.id.goToProfilePage:
-                Intent intent4 = new Intent(LandMarkRoutes.this, ProfilePage.class);
-                startActivity(intent4);
+                Toast.makeText(LandMarkRoutes.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
+
 
                 break;
 

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -22,24 +23,39 @@ public class HomePage extends AppCompatActivity implements
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         switch(item.getItemId()) {
-            case R.id.goToMaps:
-                Intent intent = new Intent(HomePage.this, LandMarkMapPage.class);
+            case R.id.goToHome:
+                Intent intent = new Intent(HomePage.this, HomePage.class);
                 startActivity(intent);
+
+                break;
+
+            case R.id.goToMaps:
+                Intent intent3 = new Intent(HomePage.this, LandMarkMapPage.class);
+                startActivity(intent3);
+
                 break;
 
             case R.id.goToSettings:
-                Intent intent2 = new Intent(HomePage.this, SettingsPage.class);
-                startActivity(intent2);
+                Intent intent4 = new Intent(HomePage.this, SettingsPage.class);
+                startActivity(intent4);
+
+                break;
+
+            case R.id.goToProfilePage:
+                Toast.makeText(HomePage.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
+
+
                 break;
 
             case R.id.goToFavorites:
-                Intent intent3 = new Intent(HomePage.this, FavoritesPage.class);
-                startActivity(intent3);
+                Intent intent6 = new Intent(HomePage.this, FavoritesPage.class);
+                startActivity(intent6);
+
                 break;
 
             case R.id.goToMapRoutes:
-                Intent intent4 = new Intent(HomePage.this, LandMarkRoutes.class);
-                startActivity(intent4);
+                Intent intent7 = new Intent(HomePage.this, LandMarkRoutes.class);
+                startActivity(intent7);
 
                 break;
 
