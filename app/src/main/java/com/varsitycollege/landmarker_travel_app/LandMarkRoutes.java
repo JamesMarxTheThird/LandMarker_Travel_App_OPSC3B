@@ -255,6 +255,8 @@ public class LandMarkRoutes extends AppCompatActivity implements OnMapReadyCallb
         getMyLocation();
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {

@@ -2,8 +2,6 @@ package com.varsitycollege.landmarker_travel_app;
 
 import static android.content.ContentValues.TAG;
 
-import static com.google.android.material.internal.ContextUtils.getActivity;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -13,7 +11,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -30,7 +27,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,10 +35,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.maps.android.SphericalUtil;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
 import com.google.android.libraries.places.api.Places;
@@ -65,6 +63,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     boolean LocationPermission;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private Location lastKnownLocation;
+    private Double theDistance;
+    private Double theDistanceInKm;
 
     //FusedLocationProviderClient
     private FusedLocationProviderClient fusedLocationProviderClient;
@@ -161,6 +161,23 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 fetchData.execute(dataFetch);
 
                 gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
+
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+
+                        LatLng clickedMrkr = marker.getPosition();
+                        LatLng currPos = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+
+                        theDistance = SphericalUtil.computeDistanceBetween(clickedMrkr, currPos);
+
+                        theDistanceInKm = theDistance / 1000;
+
+                        Toast.makeText(LandMarkMapPage.this, "Distance between Sydney and Brisbane is \n " + String.format("%.2f", theDistanceInKm) + "km",Toast.LENGTH_SHORT).show();
+
+                        return true;
+                    }
+                });
             }
         });
     }
@@ -202,6 +219,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
         //gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
     }
+
+
 
     private void getLocationPermission() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
@@ -246,6 +265,20 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
         } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
+    }
+
+    private float getDistanceBetween()
+    {
+        Location loc1 = new Location("");
+        loc1.setLatitude(-33.9803833);
+        loc1.setLongitude(18.4759092);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(-34);
+        loc2.setLongitude(151);
+
+        float distanceBet = loc1.distanceTo(loc2);
+        return distanceBet;
     }
 
     private void getDeviceLocation() {
@@ -381,10 +414,11 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
                 // Add a marker for the selected place, with an info window
                 // showing information about that place.
-                gMap.addMarker(new MarkerOptions()
+                MarkerOptions mrkrInfo = new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
-                        .snippet(markerSnippet));
+                        .snippet(markerSnippet);
+                gMap.addMarker(mrkrInfo);
 
                 // Position the map's camera at the location of the marker.
                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
@@ -459,5 +493,4 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
             e.printStackTrace();
         }
     }
-
 }
