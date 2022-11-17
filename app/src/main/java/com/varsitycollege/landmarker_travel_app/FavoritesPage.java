@@ -167,14 +167,20 @@ public class FavoritesPage extends AppCompatActivity implements
                 break;
 
             case R.id.goToProfilePage:
-                Intent intent5 = new Intent(FavoritesPage.this, ProfilePage.class);
-                startActivity(intent5);
+                Toast.makeText(FavoritesPage.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
+
 
                 break;
 
             case R.id.goToFavorites:
                 Intent intent6 = new Intent(FavoritesPage.this, FavoritesPage.class);
                 startActivity(intent6);
+
+                break;
+
+            case R.id.goToMapRoutes:
+                Intent intent7 = new Intent(FavoritesPage.this, LandMarkRoutes.class);
+                startActivity(intent7);
 
                 break;
 

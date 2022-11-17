@@ -489,8 +489,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 break;
 
             case R.id.goToProfilePage:
-                Intent intent5 = new Intent(LandMarkMapPage.this, ProfilePage.class);
-                startActivity(intent5);
+                Toast.makeText(LandMarkMapPage.this, "Feature coming soon!", Toast.LENGTH_SHORT).show();
+
 
                 break;
 
