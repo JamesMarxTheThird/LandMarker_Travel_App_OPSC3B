@@ -50,7 +50,7 @@ public class SettingsPage extends AppCompatActivity {
     private ImageButton preferrredBTN;
     private Spinner prefspinner;
     private SpinnerAdapter spinAdapt;
-
+    public String metricSelected;
 
     boolean nightMode;
     SharedPreferences sharedPreferences;

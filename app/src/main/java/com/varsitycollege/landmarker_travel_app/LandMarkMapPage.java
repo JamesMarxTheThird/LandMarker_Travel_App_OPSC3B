@@ -120,6 +120,7 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     private Double theDistanceInKm;
     private Double theDistanceInMiles;
 
+    private String metric = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,6 +199,48 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 fetchData.execute(dataFetch);
 
                 gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
+
+                gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        LatLng clickedMrkr = marker.getPosition();
+                        LatLng currPos = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+
+                        theDistance = SphericalUtil.computeDistanceBetween(clickedMrkr, currPos);
+
+                        theDistanceInKm = theDistance / 1000;
+
+                        Double distanceTime = theDistanceInKm / 60;
+
+                        Double distanceTimeMin = distanceTime * 60;
+
+                        LandMarkerRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                metric = snapshot.child("DisplaysIn").getValue(String.class);
+
+                                if (metric.equals("KM")){
+                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInKm) + "km" + " Time to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
+
+
+                                } else {
+
+                                    theDistanceInMiles = theDistanceInKm / 1.609;
+
+                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInMiles) + " miles" + " Time to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        return true;
+                    }
+                });
             }
         });
 
@@ -221,47 +264,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
             }
         });
-/*
-        gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                LatLng clickedMrkr = marker.getPosition();
-                LatLng currPos = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-
-                theDistance = SphericalUtil.computeDistanceBetween(clickedMrkr, currPos);
-
-                theDistanceInKm = theDistance / 1000;
-
-                Double distanceTime = theDistanceInKm / 60;
-
-                LandMarkerRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        String metric = snapshot.child("DisplaysIn").getValue(String.class);
-
-                        if (metric.equals("KM")){
-                            Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInKm) + "km" + "Time to get there: " + distanceTime,Toast.LENGTH_SHORT).show();
-
-                            return;
-                        } else {
-
-                            theDistanceInMiles = theDistanceInKm / 1.609;
-
-                            Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInMiles) + "km" + "Time to get there: " + distanceTime,Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
 
 
-                return true;
-            }
-        });
-*/
+
     }
     /**
      * Manipulates the map once available.
