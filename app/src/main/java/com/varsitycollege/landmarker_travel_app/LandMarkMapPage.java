@@ -41,10 +41,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.gson.internal.bind.ArrayTypeAdapter;
 import com.varsitycollege.landmarker_travel_app.databinding.ActivityLandMarkMapPageBinding;
 
@@ -105,6 +111,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
     private String spTypeSelected;
     private List<String> typeList;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference LandMarkerRef = database.getReference("Settings");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +192,27 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 fetchData.execute(dataFetch);
 
                 gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
+            }
+        });
+
+        LandMarkerRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String mode = snapshot.child("Mode").getValue(String.class);
+
+                if (mode.equals("Day")){
+                        gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(LandMarkMapPage.this, R.raw.light_mode_json));
+
+                    } else {
+                        gMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(LandMarkMapPage.this, R.raw.dark_mode_json));
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LandMarkMapPage.this, "Database Error", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
