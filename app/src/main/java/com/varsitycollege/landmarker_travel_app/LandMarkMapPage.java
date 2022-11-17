@@ -203,6 +203,9 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                 gMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
+
+                        gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
+
                         LatLng clickedMrkr = marker.getPosition();
                         LatLng currPos = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 
@@ -220,14 +223,16 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                                 metric = snapshot.child("DisplaysIn").getValue(String.class);
 
                                 if (metric.equals("KM")){
-                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInKm) + "km" + " Time to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInKm) + "km" + " \nTime to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
 
+                                    gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
 
                                 } else {
 
                                     theDistanceInMiles = theDistanceInKm / 1.609;
 
-                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInMiles) + " miles" + " Time to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LandMarkMapPage.this, "Distance:  " + String.format("%.2f", theDistanceInMiles) + " miles" + " \nTime to get there: " +  String.format("%.2f", distanceTimeMin) + "mins",Toast.LENGTH_SHORT).show();
+                                    gMap.setInfoWindowAdapter(new InfoWindowAdapter(LandMarkMapPage.this));
                                 }
 
                             }
@@ -241,6 +246,8 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
                         return true;
                     }
                 });
+
+
             }
         });
 
@@ -498,11 +505,11 @@ public class LandMarkMapPage extends AppCompatActivity implements OnMapReadyCall
 
                 // Add a marker for the selected place, with an info window
                 // showing information about that place.
-                MarkerOptions mrkrInfo = new MarkerOptions()
+                gMap.addMarker(new MarkerOptions()
                         .title(likelyPlaceNames[which])
                         .position(markerLatLng)
-                        .snippet(markerSnippet);
-                gMap.addMarker(mrkrInfo);
+                        .snippet(markerSnippet));
+                //gMap.addMarker(mrkrInfo);
 
                 // Position the map's camera at the location of the marker.
                 gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLatLng,
